@@ -4,7 +4,7 @@ import '../.././App.css';
 function LogOut(){
     return (
 	<div>
-		<h1>Login</h1>
+		<h1>Logout</h1>
 	</div>
     )
 }

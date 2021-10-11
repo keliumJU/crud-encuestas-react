@@ -13,3 +13,9 @@ h1{
 	background-color: blue;
 }
 
+.navegacion{
+	font-size: larger;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+	background-image: linear-gradient(135deg, #ff8e55 0, #ff7d53 16.67%, #ff664e 33.33%, #f94646 50%, #ea1840 66.67%, #de0040 83.33%, #d50043 100%) !important;
+	color: aqua !important;
+}

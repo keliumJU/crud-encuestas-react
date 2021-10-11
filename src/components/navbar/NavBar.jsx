@@ -1,20 +1,30 @@
 import React from 'react';
 import '../.././App.css';
 import { Navbar, Nav, Container} from 'react-bootstrap';
-
+import {Link} from 'react-router-dom';
 
 function NavBar(){
     return (
 	<>
-		<Navbar bg="dark" variant="dark">
+
+		<Navbar className="navegacion" variant="dark">
 		<Container>
-		<Navbar.Brand href="#home">Navbar</Navbar.Brand>
+		<Link to='/'>
+			<Navbar.Brand href="/">Navbar</Navbar.Brand>
+		</Link>
 		<Nav className="me-auto">
-		<Nav.Link href="#home">Home</Nav.Link>
-		<Nav.Link href="#features">Quiz</Nav.Link>
-		<Nav.Link href="#pricing">Register</Nav.Link>
-		<Nav.Link href="#pricing">Login</Nav.Link>
-		<Nav.Link href="#pricing">LogOut</Nav.Link>
+		<Link to='/encuesta'>
+			<Nav.Link href="#encuestas">Quiz</Nav.Link>
+		</Link>
+		<Link to='/register'>
+			<Nav.Link href="#Register">Register</Nav.Link>
+		</Link>
+		<Link to='/login'>
+			<Nav.Link href="#Login">Login</Nav.Link>
+		</Link>
+		<Link to='/logout'>
+			<Nav.Link href="#Logout">Logout</Nav.Link>
+		</Link>
 		</Nav>
 		</Container>
 		</Navbar>

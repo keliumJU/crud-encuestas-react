@@ -4,7 +4,7 @@ import '../.././App.css';
 function Encuesta(){
     return (
 	<div>
-		<h1>Login</h1>
+		<h1>Encuesta</h1>
 	</div>
     )
 }
