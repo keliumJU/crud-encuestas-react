@@ -1,5 +1,5 @@
 h1{
-	color: blue;
+	color: black;
 }
 
 .footer{
@@ -7,18 +7,37 @@ h1{
 	left: 0;
 	bottom: 0;
 	width: 100%;
+
+	background: #6D1B83;
+	background: -webkit-linear-gradient(right, #6D1B83, #FFFFFF);
+	background: -moz-linear-gradient(right, #6D1B83, #FFFFFF);
+	background: linear-gradient(to left, #6D1B83, #FFFFFF);
+	
 }
 
 .parrafo{
-	background-color: blue;
+	background: #6D1B83;
+	background: -webkit-linear-gradient(right, #6D1B83, #FFFFFF);
+	background: -moz-linear-gradient(right, #6D1B83, #FFFFFF);
+	background: linear-gradient(to left, #6D1B83, #FFFFFF);
 }
 
 .navegacion{
-	font-size: larger;
+	font-size: x-large;
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
-	background-image: linear-gradient(135deg, #ff8e55 0, #ff7d53 16.67%, #ff664e 33.33%, #f94646 50%, #ea1840 66.67%, #de0040 83.33%, #d50043 100%) !important;
-	color: aqua !important;
+
+
+	
+	background: #6D1B83;
+	background: -webkit-linear-gradient(right, #6D1B83, #FFFFFF);
+	background: -moz-linear-gradient(right, #6D1B83, #FFFFFF);
+	background: linear-gradient(to left, #6D1B83, #FFFFFF);
 }
+
+
+
+
+
 
 .error-msg{
 	color:#d50043;

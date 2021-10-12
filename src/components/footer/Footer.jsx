@@ -6,7 +6,7 @@ function Footer(){
     return (
 	<>
 		<footer className="footer">
-			<Navbar bg="dark" variant="dark">
+			<Navbar>
 			<Container>
 			<Navbar.Brand href="#home">Footer</Navbar.Brand>
 			<Nav className="me-auto">
