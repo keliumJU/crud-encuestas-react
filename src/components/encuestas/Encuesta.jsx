@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import '../.././App.css';
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import API from '../../api/api'
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const url = "http://127.0.0.1:5000/encuestas";
 
 class Encuesta extends Component {
@@ -27,13 +26,19 @@ class Encuesta extends Component {
 	}
 	handleInputChange = async event => {
 		await this.setState({
-			file : event.target.files[0],
+			file: event.target.files[0],
 		});
 	}
 
 
 	peticionGet = () => {
-	API.get(`encuestas_usuario?id=${this.state.form.user_id}`).then(response => {
+		const loggedInUser = localStorage.getItem("user");
+		if (loggedInUser) {
+			const foundUser = JSON.parse(loggedInUser);
+			this.state.form.user_id = foundUser.id
+		}
+
+		API.get(`encuestas_usuario?id=${this.state.form.user_id}`).then(response => {
 			this.setState({ data: response.data });
 		}).catch(error => {
 			console.log(error.message);
@@ -41,6 +46,12 @@ class Encuesta extends Component {
 	}
 
 	peticionPost = async () => {
+		const loggedInUser = localStorage.getItem("user");
+		if (loggedInUser) {
+			const foundUser = JSON.parse(loggedInUser);
+			this.state.form.user_id = foundUser.id
+		}
+
 		const data = new FormData()
 		data.append('img', this.state.file)
 		data.append('user_id', this.state.form.user_id)
@@ -75,7 +86,7 @@ class Encuesta extends Component {
 	}
 
 	peticionDelete = () => {
-		API.delete('encuesta?id='+this.state.form.id).then(response => {
+		API.delete('encuesta?id=' + this.state.form.id).then(response => {
 			this.setState({ modalEliminar: false });
 			this.peticionGet();
 		})
@@ -112,9 +123,9 @@ class Encuesta extends Component {
 		const loggedInUser = localStorage.getItem("user");
 		if (loggedInUser) {
 			const foundUser = JSON.parse(loggedInUser);
-			this.state.form.user_id=foundUser.id
+			this.state.form.user_id = foundUser.id
 		}
-	
+
 		this.peticionGet();
 	}
 
@@ -145,8 +156,8 @@ class Encuesta extends Component {
 									<td>{encuesta.descripcion}</td>
 									<td><a href={encuesta.img} target="_blank">{encuesta.img}</a></td>
 									<td>
-										<Link to={`/encuesta/seccion/${encuesta.id}`}>	
-										<button className="btn btn-info"><FontAwesomeIcon icon={faPuzzlePiece} /></button>
+										<Link to={`/encuesta/seccion/${encuesta.id}`}>
+											<button className="btn btn-info"><FontAwesomeIcon icon={faPuzzlePiece} /></button>
 										</Link>
 										{"   "}
 										<button className="btn btn-primary" onClick={() => { this.seleccionarencuesta(encuesta); this.modalInsertar() }}><FontAwesomeIcon icon={faEdit} /></button>
