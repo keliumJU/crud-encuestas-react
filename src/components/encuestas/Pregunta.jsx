@@ -8,23 +8,23 @@ import API from '../../api/api'
 
 import { Link } from 'react-router-dom';
 
-
-class Seccion extends Component {
+class Pregunta extends Component {
 	state = {
 		data: [],
 		modalInsertar: false,
 		modalEliminar: false,
 		form: {
 			id: '',
-			nombre: '',
-			id_encuesta: '' 
+			pregunta: '',
+			id_tipo_pregunta: '' ,
+			id_seccion: ''
 		},
 	}
 
 	peticionGet = () => {
 
-		this.state.form.id_encuesta=this.props.match.params.id	
-		API.get(`secciones_encuesta?id=${this.state.form.id_encuesta}`).then(response => {
+		this.state.form.id_tipo_pregunta=this.props.match.params.id	
+		API.get(`preguntaes_encuesta?id=${this.state.form.id_tipo_pregunta}`).then(response => {
 			this.setState({ data: response.data });
 		}).catch(error => {
 			console.log(error.message);
@@ -33,13 +33,13 @@ class Seccion extends Component {
 
 
 	peticionPost = async () => {
-		let id_encuesta = this.props.match.params.id;
+		let id_tipo_pregunta = this.props.match.params.id;
 		const data = new FormData()
 
-		data.append('nombre', this.state.form.nombre)
-		data.append('id_encuesta', id_encuesta)
+		data.append('pregunta', this.state.form.pregunta)
+		data.append('id_tipo_pregunta', id_tipo_pregunta)
 
-		await API.post('seccion', data).then(response => {
+		await API.post('pregunta', data).then(response => {
 			this.modalInsertar();
 			this.peticionGet();
 		}).catch(error => {
@@ -51,16 +51,16 @@ class Seccion extends Component {
 		const data = new FormData()
 
 		data.append('id', this.state.form.id)
-		data.append('nombre', this.state.form.nombre)
+		data.append('pregunta', this.state.form.pregunta)
 
-		API.put('seccion', data).then(response => {
+		API.put('pregunta', data).then(response => {
 			this.modalInsertar();
 			this.peticionGet();
 		})
 	}
 
 	peticionDelete = () => {
-		API.delete('seccion?id=' + this.state.form.id).then(response => {
+		API.delete('pregunta?id=' + this.state.form.id).then(response => {
 			this.setState({ modalEliminar: false });
 			this.peticionGet();
 		})
@@ -70,13 +70,13 @@ class Seccion extends Component {
 		this.setState({ modalInsertar: !this.state.modalInsertar });
 	}
 
-	seleccionarseccion = (seccion) => {
+	seleccionarpregunta = (pregunta) => {
 		this.setState({
 			tipoModal: 'actualizar',
 			form: {
-				id: seccion.id,
-				nombre: seccion.nombre,
-				id_encuesta: this.props.match.params.id,
+				id: pregunta.id,
+				pregunta: pregunta.pregunta,
+				id_tipo_pregunta: this.props.match.params.id,
 			}
 		})
 	}
@@ -93,8 +93,8 @@ class Seccion extends Component {
 	}
 
 	componentDidMount() {
-		this.state.form.id_encuesta=this.props.match.params.id	
-		console.log(this.state.form.id_encuesta);
+		this.state.form.id_tipo_pregunta=this.props.match.params.id	
+		console.log(this.state.form.id_tipo_pregunta);
 		this.peticionGet();
 
 	}
@@ -105,30 +105,32 @@ class Seccion extends Component {
 		return (
 			<div className="App">
 				<br /><br /><br />
-				<button className="btn btn-success" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar() }}>Agregar seccion</button>
+				<button className="btn btn-success" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar() }}>Agregar pregunta</button>
 				<br /><br />
 				<table className="table ">
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Nombre</th>
+							<th>Pregunta</th>
+							<th>Tipo pregunta</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						{this.state.data.map(seccion => {
+						{this.state.data.map(pregunta => {
 							return (
 								<tr>
-									<td>{seccion.id}</td>
-									<td>{seccion.nombre}</td>
+									<td>{pregunta.id}</td>
+									<td>{pregunta.pregunta}</td>
+									<td>{pregunta.id_tipo_pregunta}</td>
 									<td>
-										<Link to={`/encuesta/seccion/preguntas/${seccion.id}`}>
+										<Link to={`/encuesta/pregunta/preguntas/${pregunta.id}`}>
 											<button className="btn btn-info"><FontAwesomeIcon icon={faQuestionCircle} /></button>
 										</Link>
 										{"   "}
-										<button className="btn btn-primary" onClick={() => { this.seleccionarseccion(seccion); this.modalInsertar() }}><FontAwesomeIcon icon={faEdit} /></button>
+										<button className="btn btn-primary" onClick={() => { this.seleccionarpregunta(pregunta); this.modalInsertar() }}><FontAwesomeIcon icon={faEdit} /></button>
 										{"   "}
-										<button className="btn btn-danger" onClick={() => { this.seleccionarseccion(seccion); this.setState({ modalEliminar: true }) }}><FontAwesomeIcon icon={faTrashAlt} /></button>
+										<button className="btn btn-danger" onClick={() => { this.seleccionarpregunta(pregunta); this.setState({ modalEliminar: true }) }}><FontAwesomeIcon icon={faTrashAlt} /></button>
 									</td>
 								</tr>
 							)
@@ -147,8 +149,8 @@ class Seccion extends Component {
 							<label htmlFor="id">ID</label>
 							<input className="form-control" type="text" name="id" id="id" readOnly onChange={this.handleChange} value={form ? form.id : this.state.data.length + 1} />
 							<br />
-							<label htmlFor="nombre">Name</label>
-							<input className="form-control" type="text" name="nombre" id="nombre" onChange={this.handleChange} value={form ? form.nombre : ''} />
+							<label htmlFor="pregunta">Name</label>
+							<input className="form-control" type="text" name="pregunta" id="pregunta" onChange={this.handleChange} value={form ? form.pregunta : ''} />
 							<br />
 						</div>
 					</ModalBody>
@@ -168,7 +170,7 @@ class Seccion extends Component {
 
 				<Modal isOpen={this.state.modalEliminar}>
 					<ModalBody>
-						Estás seguro que deseas eliminar a la seccion {form && form.nombre}
+						Estás seguro que deseas eliminar a la pregunta {form && form.pregunta}
 					</ModalBody>
 					<ModalFooter>
 						<button className="btn btn-danger" onClick={() => this.peticionDelete()}>Sí</button>
@@ -179,4 +181,4 @@ class Seccion extends Component {
 		);
 	}
 }
-export default Seccion;
+export default Pregunta;
