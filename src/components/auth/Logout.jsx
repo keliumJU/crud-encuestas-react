@@ -1,12 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+
+
 import '../.././App.css';
 
-function LogOut(){
+const LogOut = () => {
+
+	let history=useHistory();
+
+	useEffect(() => {
+		const loggedInUser = localStorage.getItem("user");
+		if (loggedInUser) {
+			localStorage.clear();
+			history.push('/');
+		}
+	});
+
     return (
-	<div>
-		<h1>Logout</h1>
-	</div>
-    )
-}
+		<>
+		</>
+    );
+};
 
 export default LogOut;
