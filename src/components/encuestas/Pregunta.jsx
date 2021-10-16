@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../.././App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import API from '../../api/api'
 
@@ -16,15 +16,27 @@ class Pregunta extends Component {
 		form: {
 			id: '',
 			pregunta: '',
-			id_tipo_pregunta: '' ,
-			id_seccion: ''
+			id_seccion: '' ,
+			id_tipo_pregunta: '', 
 		},
+		tipos_de_preguntas: [],
 	}
 
-	peticionGet = () => {
+	getTiposdePreguntas = () => {
+		API.get('tipo_preguntas').then(response => {
+			console.log("this is response de tipos de preguntas: ")
+			console.log(response.data)
+			this.setState({ tipos_de_preguntas: response.data });
+			console.log('lista de tipos de preguntas: ')
+			console.log(this.state.tipos_de_preguntas)
+		}).catch(error => {
+			console.log(error.message);
+		})
+	}
 
-		this.state.form.id_tipo_pregunta=this.props.match.params.id	
-		API.get(`preguntaes_encuesta?id=${this.state.form.id_tipo_pregunta}`).then(response => {
+	peticionGet = async () => {
+		this.state.form.id_seccion=this.props.match.params.id	
+		API.get(`preguntas_seccion?id=${this.state.form.id_seccion}`).then(response => {
 			this.setState({ data: response.data });
 		}).catch(error => {
 			console.log(error.message);
@@ -33,11 +45,16 @@ class Pregunta extends Component {
 
 
 	peticionPost = async () => {
-		let id_tipo_pregunta = this.props.match.params.id;
+		let id_seccion = this.props.match.params.id;
 		const data = new FormData()
 
+		if(this.state.form.id_tipo_pregunta==null){
+			data.append('id_tipo_pregunta',1)
+		}else{
+			data.append('id_tipo_pregunta', this.state.form.id_tipo_pregunta)
+		}
 		data.append('pregunta', this.state.form.pregunta)
-		data.append('id_tipo_pregunta', id_tipo_pregunta)
+		data.append('id_seccion', id_seccion)
 
 		await API.post('pregunta', data).then(response => {
 			this.modalInsertar();
@@ -52,6 +69,9 @@ class Pregunta extends Component {
 
 		data.append('id', this.state.form.id)
 		data.append('pregunta', this.state.form.pregunta)
+		data.append('id_tipo_pregunta', this.state.form.id_tipo_pregunta)
+
+		
 
 		API.put('pregunta', data).then(response => {
 			this.modalInsertar();
@@ -76,7 +96,7 @@ class Pregunta extends Component {
 			form: {
 				id: pregunta.id,
 				pregunta: pregunta.pregunta,
-				id_tipo_pregunta: this.props.match.params.id,
+				id_tipo_pregunta: pregunta.id_tipo_pregunta
 			}
 		})
 	}
@@ -93,15 +113,16 @@ class Pregunta extends Component {
 	}
 
 	componentDidMount() {
-		this.state.form.id_tipo_pregunta=this.props.match.params.id	
-		console.log(this.state.form.id_tipo_pregunta);
+		this.state.form.id_seccion=this.props.match.params.id	
 		this.peticionGet();
-
+		this.getTiposdePreguntas();
 	}
 
 
 	render() {
 		const { form } = this.state;
+		const data_tipo = this.state.tipos_de_preguntas;
+
 		return (
 			<div className="App">
 				<br /><br /><br />
@@ -122,10 +143,13 @@ class Pregunta extends Component {
 								<tr>
 									<td>{pregunta.id}</td>
 									<td>{pregunta.pregunta}</td>
-									<td>{pregunta.id_tipo_pregunta}</td>
+									<td>{data_tipo.map(tipo=>{
+										if(tipo.id==pregunta.id_tipo_pregunta)
+											return tipo.nombre
+									})}</td>
 									<td>
-										<Link to={`/encuesta/pregunta/preguntas/${pregunta.id}`}>
-											<button className="btn btn-info"><FontAwesomeIcon icon={faQuestionCircle} /></button>
+										<Link to={`/encuesta/seccion/preguntas/opciones/${pregunta.id}`}>
+											<button className="btn btn-info"><FontAwesomeIcon icon={faDiceD20} /></button>
 										</Link>
 										{"   "}
 										<button className="btn btn-primary" onClick={() => { this.seleccionarpregunta(pregunta); this.modalInsertar() }}><FontAwesomeIcon icon={faEdit} /></button>
@@ -149,9 +173,18 @@ class Pregunta extends Component {
 							<label htmlFor="id">ID</label>
 							<input className="form-control" type="text" name="id" id="id" readOnly onChange={this.handleChange} value={form ? form.id : this.state.data.length + 1} />
 							<br />
-							<label htmlFor="pregunta">Name</label>
+							<label htmlFor="pregunta">Pregunta</label>
 							<input className="form-control" type="text" name="pregunta" id="pregunta" onChange={this.handleChange} value={form ? form.pregunta : ''} />
 							<br />
+							<label htmlFor="pregunta">TipoPregunta</label>
+							<select name="id_tipo_pregunta" id="id_tipo_pregunta" className="form-control" onChange={this.handleChange} value={form ? form.id_tipo_pregunta : ''} >
+								{ this.state.tipos_de_preguntas.map(tipo => {
+									return (
+										<option value={tipo.id}>{tipo.nombre}</option>	
+									)
+								})
+								}
+							</select>
 						</div>
 					</ModalBody>
 

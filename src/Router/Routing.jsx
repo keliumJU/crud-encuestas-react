@@ -5,6 +5,7 @@ import Register from '../components/auth/Register';
 import Encuesta from '../components/encuestas/Encuesta'
 import Seccion from '../components/encuestas/Seccion'
 import Pregunta from '../components/encuestas/Pregunta'
+import Opcion from '../components/encuestas/Opcion'
 import Home from '../components/Home';
 import {Switch, Route} from 'react-router-dom';
 
@@ -16,7 +17,8 @@ function Routing(){
 				<Route path="/" exact component={Home} />
 				<Route path="/encuesta" exact component={Encuesta} />
 				<Route path="/encuesta/seccion/:id" exact component={Seccion} />
-				<Route path="/encuesta/seccion/preguntas/:id" component={Pregunta} />
+				<Route path="/encuesta/seccion/preguntas/:id" exact component={Pregunta} />
+				<Route path="/encuesta/seccion/preguntas/opciones/:id" exact component={Opcion} />
 				<Route path="/login" component={Login} />
 				<Route path="/logout" component={Logout} />
 				<Route path="/register" component={Register} />
