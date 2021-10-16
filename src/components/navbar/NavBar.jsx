@@ -17,8 +17,8 @@ function NavBar(){
 
 		<Nav className="mx-auto">
 
-		<Link className="nav-encuesta" to='/encuesta'>
-			<Nav.Link className="link-nav" to="/">Quiz</Nav.Link>
+		<Link to='/encuesta'>
+			<Nav.Link href="#Encuesta">Quiz</Nav.Link>
 		</Link>
 
 		<Link to='/register'>
