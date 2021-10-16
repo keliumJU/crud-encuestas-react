@@ -38,3 +38,7 @@ h1{
 .error-msg{
 	color:#d50043;
 }
+
+.card-columns {
+    column-count: 3;
+}

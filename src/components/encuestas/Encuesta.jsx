@@ -138,12 +138,13 @@ class Encuesta extends Component {
 				<br /><br /><br />
 				<button className="btn btn-success" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar() }}>Agregar encuesta</button>
 				<br /><br />
-				<Container>
-				<Row xs={1} md={4} className="g-1">
+				<Container >
+				<Row >
+					<div className="card-columns">
 					{this.state.data.map(encuesta => {
 						return (
 							<Col>
-								<Card >
+								<Card>
 									<Card.Img variant="top" src={encuesta.img} />
 									<Card.Body>
 										<Card.Title>{encuesta.nombre}</Card.Title>
@@ -165,7 +166,7 @@ class Encuesta extends Component {
 						)
 					})
 					}
-
+					</div>
 				</Row>
 				</Container>
 				<Modal isOpen={this.state.modalInsertar}>
