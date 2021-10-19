@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Card, Row, Col, Container, CardGroup } from 'react-bootstrap';
 import API from '../../api/api'
 
 import { Link } from 'react-router-dom';
@@ -137,25 +138,21 @@ class Encuesta extends Component {
 				<br /><br /><br />
 				<button className="btn btn-success" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar() }}>Agregar encuesta</button>
 				<br /><br />
-				<table className="table ">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Nombre</th>
-							<th>Descripcion</th>
-							<th>Imgth</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						{this.state.data.map(encuesta => {
-							return (
-								<tr>
-									<td>{encuesta.id}</td>
-									<td>{encuesta.nombre}</td>
-									<td>{encuesta.descripcion}</td>
-									<td><a href={encuesta.img} target="_blank">{encuesta.img}</a></td>
-									<td>
+				<Container >
+				<Row >
+					<div className="card-columns">
+					{this.state.data.map(encuesta => {
+						return (
+							<Col>
+								<Card>
+									<Card.Img variant="top" src={encuesta.img} />
+									<Card.Body>
+										<Card.Title>{encuesta.nombre}</Card.Title>
+										<Card.Text>
+											{encuesta.descripcion}
+										</Card.Text>
+									</Card.Body>
+									<Card.Body>
 										<Link to={`/encuesta/seccion/${encuesta.id}`}>
 											<button className="btn btn-info"><FontAwesomeIcon icon={faPuzzlePiece} /></button>
 										</Link>
@@ -163,15 +160,15 @@ class Encuesta extends Component {
 										<button className="btn btn-primary" onClick={() => { this.seleccionarencuesta(encuesta); this.modalInsertar() }}><FontAwesomeIcon icon={faEdit} /></button>
 										{"   "}
 										<button className="btn btn-danger" onClick={() => { this.seleccionarencuesta(encuesta); this.setState({ modalEliminar: true }) }}><FontAwesomeIcon icon={faTrashAlt} /></button>
-									</td>
-								</tr>
-							)
-						})}
-					</tbody>
-				</table>
-
-
-
+									</Card.Body>
+								</Card>
+							</Col>
+						)
+					})
+					}
+					</div>
+				</Row>
+				</Container>
 				<Modal isOpen={this.state.modalInsertar}>
 					<ModalHeader style={{ display: 'block' }}>
 						<span style={{ float: 'right' }} onClick={() => this.modalInsertar()}>x</span>
