@@ -144,8 +144,8 @@ class Encuesta extends Component {
 					{this.state.data.map(encuesta => {
 						return (
 							<Col>
-								<Card>
-									<Card.Img variant="top" src={encuesta.img} />
+								<Card className="card-block" >
+									<img className="card-img-top img-fluid" src={encuesta.img} alt={encuesta.nombre}/>
 									<Card.Body>
 										<Card.Title>{encuesta.nombre}</Card.Title>
 										<Card.Text>
