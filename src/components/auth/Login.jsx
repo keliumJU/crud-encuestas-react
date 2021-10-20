@@ -65,25 +65,29 @@ export default class Login extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<Form method="POST" onSubmit={this.handleSubmit}>
-					<div className="error-msg">{this.state.errors.usermsg}</div>
-					<Form.Group className="mb-3" controlId="formBasicInput">
-						<Form.Label>Username</Form.Label>
-						<Form.Control type="text" name="nombre" placeholder="Enter username" onChange={this.handleChange} />
-						<Form.Text className="text-muted">
-							We'll never share your email with anyone else.
-						</Form.Text>
-					</Form.Group>
+			<div className="grid-login">
+				<div className="container-grid-login border m-4 position-relative">
+					<div className="container-formulario-login position-absolute top-50 start-50 translate-middle">
+						<Form method="POST" onSubmit={this.handleSubmit}>
+							<div className="error-msg">{this.state.errors.usermsg}</div>
+							<Form.Group className="mb-3" controlId="formBasicInput">
+								<Form.Label>Username</Form.Label>
+								<Form.Control type="text" name="nombre" placeholder="Enter username" onChange={this.handleChange} />
+								<Form.Text className="text-muted">
+									We'll never share your email with anyone else.
+								</Form.Text>
+							</Form.Group>
 
-					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Label>Password</Form.Label>
-						<Form.Control type="password" name="contrasenia" placeholder="Password" onChange={this.handleChange} />
-					</Form.Group>
-					<Button variant="primary" type="submit">
-						Submit
-					</Button>
-				</Form>
+							<Form.Group className="mb-3" controlId="formBasicPassword">
+								<Form.Label>Password</Form.Label>
+								<Form.Control type="password" name="contrasenia" placeholder="Password" onChange={this.handleChange} />
+							</Form.Group>
+							<Button variant="primary" type="submit">
+								Submit
+							</Button>
+						</Form>
+					</div>
+				</div>
 			</div>
 		)
 	}

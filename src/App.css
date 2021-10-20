@@ -15,13 +15,6 @@ h1{
 	
 }
 
-.parrafo{
-	background: #6D1B83;
-	background: -webkit-linear-gradient(right, #6D1B83, #FFFFFF);
-	background: -moz-linear-gradient(right, #6D1B83, #FFFFFF);
-	background: linear-gradient(to left, #6D1B83, #FFFFFF);
-}
-
 .navegacion{
 	font-size: x-large;
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
@@ -32,6 +25,110 @@ h1{
 	background: -webkit-linear-gradient(right, #6D1B83, #FFFFFF);
 	background: -moz-linear-gradient(right, #6D1B83, #FFFFFF);
 	background: linear-gradient(to left, #6D1B83, #FFFFFF);
+}
+
+.grid{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	
+	gap: 1em;
+	grid-auto-rows: minmax(400px, auto);
+}
+
+.grid > div{
+	background: white;
+}
+
+.grid-anidado-uno > h1 {
+	color: #6D1B83;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.grid-anidado-uno * span {
+	color: aqua;
+	font-size: 30px;
+}
+
+
+.container-grid-dos{
+	width: 600px;
+	height: 90%;
+}
+
+.container-grid-dos * form{
+	width: 450px;
+	height: 250px; 
+	border: 1px solid #C00;
+	box-shadow: 0 0  20px 0 purple;
+}
+
+.container-grid-dos * p{
+	background-image: linear-gradient(135deg, #ffd6ff 0, #ffc9ff 16.67%, #ffbaff 33.33%, #e2a9f2 50%, #be97d8 66.67%, #9f87c0 83.33%, #8579aa 100%);
+	text-align: center;
+	font-weight: bold;
+	font-size: 40px;
+} 
+
+.container-grid-dos > form * button {
+	text-align: center;
+}
+
+/*.formulario-grid{
+	 width: 400px;
+	height: 100px;
+	top: calc(50% - 200px);
+	left: calc(50% - 50px); 
+
+}*/
+
+.grid > div:hover{
+	border: 1px solid black;
+}
+
+/*____________________________________Register______________________________*/
+
+.grid-register {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1em;
+	grid-auto-rows: minmax(600px);
+
+}
+
+.container-grid-register{
+	width: 1200px;
+	height: 400px;
+}
+
+.container-grid-register * form{
+	width: 450px;
+	height: 250px; 
+	border: 1px solid #C00;
+	box-shadow: 0 0  20px 0 purple;
+}
+
+/*________________________________LOGIN____________________*/
+
+.grid-login {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1em;
+	grid-auto-rows: minmax(600px);
+
+}
+
+.container-grid-login{
+	width: 1200px;
+	height: 400px;
+}
+
+.container-grid-login * form{
+	width: 450px;
+	height: 250px; 
+	border: 1px solid #C00;
+	box-shadow: 0 0  20px 0 purple;
 }
 
 
