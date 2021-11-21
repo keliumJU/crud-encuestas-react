@@ -14,6 +14,7 @@ function Home(){
 					<img src="./mujer-encuesta.png" alt="" />
 				</div>
 			</div>
+
 			<div className="grid-dos">
 				<div className="container-grid-dos border m-4 position-relative">
 					<div className="container-formulario position-absolute top-50 start-50 translate-middle">
@@ -36,19 +37,72 @@ function Home(){
 					</div>
 				</div>
 			</div>
-			<div>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae voluptas, distinctio provident aliquid magnam obcaecati commodi quam ipsa odit quasi? Debitis voluptatum, dolores vero recusandae assumenda adipisci nisi error ab.</p>
-			</div>
-			<div>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae voluptas, distinctio provident aliquid magnam obcaecati commodi quam ipsa odit quasi? Debitis voluptatum, dolores vero recusandae assumenda adipisci nisi error ab.</p>
-			</div>
-			<div>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae voluptas, distinctio provident aliquid magnam obcaecati commodi quam ipsa odit quasi? Debitis voluptatum, dolores vero recusandae assumenda adipisci nisi error ab.</p>
-			</div>
-			<div>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae voluptas, distinctio provident aliquid magnam obcaecati commodi quam ipsa odit quasi? Debitis voluptatum, dolores vero recusandae assumenda adipisci nisi error ab.</p>
+
+			<div className="grid-tres">
+				<div className="grid-anidado-tres-uno">
+						<h2>¡Únete a la MEJOR comunidad de Opinión Online!</h2>
+				</div>
+
+				<div className="grid-anidado-tres-dos">
+					<div className="grid-anidado-tres-seccion1">
+						<div className="gats1-nombre-seccion1">
+							<p>Márketin Digital</p>
+						</div>
+						<div className="gats1-descripcion-seccion1">
+							<div className="gats1-imagen-seccion1">
+								<p>Imágen</p>
+							</div>
+							<div className="gats1-contenido-imagen-seccion1">
+								<p>Contenido-Descripción</p>
+							</div>
+						</div>
+					</div>
+					<div className="grid-anidado-tres-seccion2">
+						<div className="gats2-nombre-seccion2">
+								<p>Testing</p>
+						</div>
+						<div className="gats2-descripcion-seccion2">
+							<div className="gats2-imagen-seccion2">
+									<p>Imágen</p>
+							</div>
+							<div className="gats2-contenido-imagen-seccion2">
+									<p>Contenido-Descripción</p>
+							</div>
+						</div>
+					</div>
+					<div className="grid-anidado-tres-seccion3">
+						<div className="gats3-nombre-seccion3">
+								<p>Testing</p>
+						</div>
+						<div className="gats3-descripcion-seccion3">
+							<div className="gats3-imagen-seccion3">
+									<p>Imágen</p>
+							</div>
+							<div className="gats3-contenido-imagen-seccion3">
+									<p>Contenido-Descripción</p>
+							</div>
+						</div>	
+					</div>
+				</div>
 			</div>
 
+			<div className="grid-cuatro">
+					<div className="g4-info1">
+						<p>Info 1</p>
+					</div>
+					<div className="g4-info2">
+						<p>Info 2</p>
+					</div>
+			</div>
+
+			<div className="grid-cinco">
+					<div className="g5-info1">
+							<p>Info 1</p>
+					</div>
+					<div className="g5-info2">
+							<p>Info 2</p>
+					</div>					
+			</div>
 		</div>
 		
 	</>
