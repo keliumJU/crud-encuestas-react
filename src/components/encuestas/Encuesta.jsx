@@ -6,6 +6,7 @@ import { faEdit, faTrashAlt, faPuzzlePiece } from '@fortawesome/free-solid-svg-i
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Card, Row, Col, Container, CardGroup } from 'react-bootstrap';
 import API from '../../api/api'
+import jwt from 'jwt-decode'
 
 import { Link } from 'react-router-dom';
 const url = "http://127.0.0.1:5000/encuestas";
@@ -34,9 +35,9 @@ class Encuesta extends Component {
 
 	peticionGet = () => {
 		const loggedInUser = localStorage.getItem("user");
+		const user = jwt(loggedInUser)
 		if (loggedInUser) {
-			const foundUser = JSON.parse(loggedInUser);
-			this.state.form.user_id = foundUser.id
+			this.state.form.user_id = user.sub
 		}
 
 		API.get(`encuestas_usuario?id=${this.state.form.user_id}`).then(response => {
@@ -48,9 +49,9 @@ class Encuesta extends Component {
 
 	peticionPost = async () => {
 		const loggedInUser = localStorage.getItem("user");
+		const user=jwt(loggedInUser)
 		if (loggedInUser) {
-			const foundUser = JSON.parse(loggedInUser);
-			this.state.form.user_id = foundUser.id
+			this.state.form.user_id = user.sub 
 		}
 
 		const data = new FormData()
@@ -122,9 +123,12 @@ class Encuesta extends Component {
 
 	componentDidMount() {
 		const loggedInUser = localStorage.getItem("user");
+		const user = jwt(loggedInUser);
+		console.log(user.sub)
 		if (loggedInUser) {
-			const foundUser = JSON.parse(loggedInUser);
-			this.state.form.user_id = foundUser.id
+			this.state.form.user_id = parseInt(user.sub)
+			console.log("this is the user id: ")
+			console.log(this.state.form.user_id)
 		}
 
 		this.peticionGet();
